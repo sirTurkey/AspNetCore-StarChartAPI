@@ -28,6 +28,21 @@ namespace StarChart.Controllers
             return Ok(celestialObject);
         }
 
-         
+        [HttpGet("{name}", Name ="GetByName")]
+         public IActionResult GetByName(string name)
+        {
+            var celestialObject = _context.CelestialObjects.Where(e => e.Name.Equals(name)).FirstOrDefault();
+            if(celestialObject == null)
+                return NotFound();
+            celestialObject.Satellites = _context.CelestialObjects.Where(e => e.OrbitedObjectId == celestialObject.Id).ToList();
+            return Ok(celestialObject);
+
+        }
+
+        [HttpGet(Name = "GetAll")]
+        public IActionResult GetAll()
+        {
+            return NotFound();
+        }
     }
 }
