@@ -28,6 +28,6 @@ namespace StarChart.Controllers
             return Ok(celestialObject);
         }
 
-        public 
+         
     }
 }
